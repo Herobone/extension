@@ -3,27 +3,26 @@
 	src: url('/assets/fonts/opendyslexic/regular.otf');
 	font-style: normal;
 	font-weight: normal;
-}
-
+	unicode-range: U+0000-024F, U+2000-206F, U+20AC, U+2122, U+2200-22FF;
 @font-face {
 	font-family: 'opendyslexic';
 	src: url('/assets/fonts/opendyslexic/italic.otf');
 	font-style: italic;
 	font-weight: normal;
-}
-
+	unicode-range: U+0000-024F, U+2000-206F, U+20AC, U+2122, U+2200-22FF;
 @font-face {
 	font-family: 'opendyslexic';
 	src: url('/assets/fonts/opendyslexic/bold.otf');
 	font-weight: bold;
 	font-style: normal;
-}
+	unicode-range: U+0000-024F, U+2000-206F, U+20AC, U+2122, U+2200-22FF;
 
 @font-face {
 	font-family: 'opendyslexic';
 	src: url('/assets/fonts/opendyslexic/bold-italic.otf');
 	font-weight: bold;
 	font-style: italic;
+	unicode-range: U+0000-024F, U+2000-206F, U+20AC, U+2122, U+2200-22FF;
 }
 
 @font-face {
@@ -31,6 +30,7 @@
 	src: url('/assets/fonts/opendyslexic/regular.otf');
 	font-weight: normal;
 	font-style: normal;
+	unicode-range: U+0000-024F, U+2000-206F, U+20AC, U+2122, U+2200-22FF;
 }
 
 .viewport,
