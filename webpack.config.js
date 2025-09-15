@@ -123,8 +123,8 @@ module.exports = {
 					to: path.resolve(__dirname, 'dist/_locales/')
 				},
 				{
-					from: './assets/images/',
-					to: path.resolve(__dirname, 'dist/assets/images/')
+					from: './assets/images/icons/',
+					to: path.resolve(__dirname, 'dist/assets/images/icons/'),
 				},
 				{
 					from: 'index.html',
