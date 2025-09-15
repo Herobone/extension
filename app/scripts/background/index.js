@@ -1,30 +1,38 @@
 import { isEmpty } from '@scripts/content/utils.js';
-import { update } from '@scripts/content/badge.js';
+import { updateBadge } from '@scripts/content/badge.js';
 
 chrome.storage.onChanged.addListener(async (changes, areaName) => {
-	if (areaName !== 'local' && areaName !== 'sync') {
-		return;
-	}
+	if (areaName !== 'local' && areaName !== 'sync') return;
 
-	const currentFont = await getStorage('font');
-	const isEnabled = await getStorage('enabled');
+	// Only query storage for what actually changed
+	let currentFontValue = null;
+	let enabledValue = null;
 
+	// Update badge if enabled changed
 	if (changes.enabled) {
-		update({ state: changes.enabled.newValue || false });
-		const newMode = changes.enabled.newValue;
+		const newMode = !!changes.enabled.newValue;
+		updateBadge({ state: newMode });
+
+		const storedFont = await getStorage('font');
+		currentFontValue = storedFont.found ? storedFont.item : 'regular';
+
 		sendToAllTabs({
 			type: 'openDyslexicIsOn',
 			enabled: newMode,
-			font: currentFont.found ? currentFont.item : 'regular'
+			font: currentFontValue
 		});
 	}
 
 	if (changes.font) {
 		const newFont = changes.font.newValue;
+
+		const storedEnabled = await getStorage('enabled');
+		enabledValue = storedEnabled.found ? storedEnabled.item : false;
+
 		sendToAllTabs({
 			type: 'updateFont',
 			font: newFont,
-			enabled: isEnabled.found ? isEnabled.item : false
+			enabled: !!enabledValue
 		});
 	}
 });
@@ -32,9 +40,11 @@ chrome.storage.onChanged.addListener(async (changes, areaName) => {
 function sendToAllTabs(message) {
 	try {
 		chrome.tabs.query({}, (tabs) => {
-			tabs.forEach((tab) => {
-				chrome.tabs.sendMessage(tab.id, message);
-			});
+			for (const tab of tabs) {
+				if (tab && tab.id != null) {
+					chrome.tabs.sendMessage(tab.id, message);
+				}
+			}
 		});
 	} catch (error) {}
 }
@@ -66,5 +76,5 @@ async function getStorage(key) {
  * Load initial settings from storage.
  */
 chrome.storage.local.get(['enabled'], (data) => {
-	update({ state: data.enabled || false });
+	updateBadge({ state: data.enabled || false });
 });

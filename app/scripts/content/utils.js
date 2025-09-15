@@ -53,31 +53,29 @@ export function isEmpty(value) {
 }
 
 export function removeElementById(id) {
-	var element = document.getElementById(id);
-	if (element) {
-		element.parentNode.removeChild(element);
-	}
-
-	var element = document.getElementById(`${id}_2`);
-	if (element) {
-		element.parentNode.removeChild(element);
-	}
+	const targets = [id, `${id}_2`];
+	targets.forEach((targetId) => {
+		const el = document.getElementById(targetId);
+		if (el && el.parentNode) {
+			el.parentNode.removeChild(el);
+		}
+	});
 }
 
 export function injectCssInline(id, style) {
-	let head = document.head || document.getElementsByTagName('head')[0];
-	let sheet = document.createElement('style');
-
-	sheet.setAttribute('id', id);
-
-	sheet.type = 'text/css';
-
-	sheet.appendChild(document.createTextNode(style));
-	head.appendChild(sheet);
+	const head = document.head || document.getElementsByTagName('head')[0];
+	// Can now also update existing styles
+	let tag = document.getElementById(id);
+	if (!tag) {
+		tag = document.createElement('style');
+		tag.id = id;
+		head.appendChild(tag);
+	}
+	if (tag.textContent !== style) tag.textContent = style;
 }
 
 export function idExists(id) {
-	return document.getElementById(id) !== null;
+	return !!document.getElementById(id);
 }
 
 export function isNull(value) {
