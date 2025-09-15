@@ -1,5 +1,4 @@
 {
-	"name": "__MSG_appNameFirefox__",
 	"version": "2025.9.14",
 	"manifest_version": 3,
 	"description": "__MSG_appDescription__",
@@ -18,23 +17,34 @@
 		"default_popup": "index.html"
 	},
 	"default_locale": "en",
-	"permissions": ["activeTab", "storage"],
+	"permissions": [
+		"activeTab",
+		"storage"
+	],
 	"content_scripts": [
 		{
-			"matches": ["http://*/*", "https://*/*", "file:///*/*"],
-			"js": ["scripts/engine.js"],
-			"exclude_globs": ["*://docs.google.com/*"]
+			"matches": [
+				"http://*/*",
+				"https://*/*",
+				"file:///*/*"
+			],
+			"js": [
+				"scripts/engine.js"
+			],
+			"exclude_globs": [
+				"*://docs.google.com/*"
+			],
+			"run_at": "document_start"
 		}
 	],
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "{759dbb01-b646-4327-bf9e-69ca2543ef8d}",
-			"strict_min_version": "114.0"
-		}
+	"background": {
+		"service_worker": "scripts/background.js"
 	},
 	"web_accessible_resources": [
 		{
-			"matches": ["https://*/*"],
+			"matches": [
+				"https://*/*"
+			],
 			"resources": [
 				"assets/fonts/opendyslexic/bold.otf",
 				"assets/fonts/opendyslexic/bold-italic.otf",
@@ -43,5 +53,12 @@
 				"assets/styles/core/opendyslexic.css"
 			]
 		}
-	]
+	],
+	"name": "__MSG_appNameFirefox__",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{759dbb01-b646-4327-bf9e-69ca2543ef8d}",
+			"strict_min_version": "114.0"
+		}
+	}
 }

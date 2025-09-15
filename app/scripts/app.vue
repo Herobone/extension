@@ -138,59 +138,57 @@
 		inject: ['$helperbird_i18n'],
 
 		data() {
-			return {
-				paid: true,
-				enable: null,
-				adverts: [
-					{
-						href: 'https://www.patreon.com/opendyslexic',
-						text: this.$helperbird_i18n('followAbbie')
-					},
-					{
-						href: 'https://github.com/OpenDyslexic/extension',
-						text: this.$helperbird_i18n('weAreOnGithub')
-					},
-					{
-						href: 'https://www.x.com/opendyslexic',
-						text: this.$helperbird_i18n('followDyslexicToolTip')
-					},
-					{
-						href: 'https://addons.mozilla.org/en-US/firefox/addon/opendyslexic-for-firefox/',
-						text: this.$helperbird_i18n('downloadOnFirefox')
-					},
+			const adverts = [
+				{
+					href: 'https://www.patreon.com/opendyslexic',
+					text: this.$helperbird_i18n('followAbbie')
+				},
+				{
+					href: 'https://github.com/OpenDyslexic/extension',
+					text: this.$helperbird_i18n('weAreOnGithub')
+				},
+				{
+					href: 'https://www.x.com/opendyslexic',
+					text: this.$helperbird_i18n('followDyslexicToolTip')
+				},
+				{
+					href: 'https://addons.mozilla.org/en-US/firefox/addon/opendyslexic-for-firefox/',
+					text: this.$helperbird_i18n('downloadOnFirefox')
+				},
 					{
 						href: 'https://www.patreon.com/opendyslexic',
 						text: this.$helperbird_i18n('created_by')
 					},
-					{
-						href: 'https://discord.com/invite/wRfymbz2',
-						text: this.$helperbird_i18n('bugs')
-					},
-					{
-						href: 'https://www.helperbird.com',
-						text: this.$helperbird_i18n('helperbird')
-					},
+				{
+					href: 'https://discord.com/invite/wRfymbz2',
+					text: this.$helperbird_i18n('bugs')
+				},
+				{
+					href: 'https://www.helperbird.com',
+					text: this.$helperbird_i18n('helperbird')
+				},
 					{
 						href: 'https://www.coffeeandfun.com',
 						text: this.$helperbird_i18n('followRobertJamesToolTip')
 					},
-					{
-						href: 'https://chrome.google.com/webstore/detail/opendyslexic-for-chrome/cdnapgfjopgaggbmfgbiinmmbdcglnam/reviews',
-						text: this.$helperbird_i18n('supportToolTip')
-					}
-				],
-				font: 'regular',
+				{
+					href: 'https://chrome.google.com/webstore/detail/opendyslexic-for-chrome/cdnapgfjopgaggbmfgbiinmmbdcglnam/reviews',
+					text: this.$helperbird_i18n('supportToolTip')
+				}
+			];
 
+			const fonts = [
+				{ title: 'OpenDyslexic', font: 'regular' },
+				{ title: 'OpenDyslexic Bold', font: 'bold' },
+				{ title: 'OpenDyslexic Italic', font: 'italic' }
+			];
+
+			return {
+				enable: false,
+				adverts,
 				text: {
-					selectedFont: {
-						title: 'OpenDyslexic',
-						font: 'regular'
-					},
-					fonts: [
-						{ title: 'OpenDyslexic', font: 'regular' },
-						{ title: 'OpenDyslexic Bold', font: 'bold' },
-						{ title: 'OpenDyslexic Italic', font: 'italic' }
-					]
+					selectedFont: fonts[0],
+					fonts
 				}
 			};
 		},
@@ -198,13 +196,11 @@
 		mounted() {
 			const SETTING_KEYS = ['font', 'enabled'];
 			chrome.storage.local.get(SETTING_KEYS, (settings) => {
-				const found = this.text.fonts.find(
-					(f) => f.font === settings.font
-				);
-				if (found) {
-					this.text.selectedFont = found;
+				if (settings.font) {
+					const found = this.text.fonts.find(f => f.font === settings.font);
+					if (found) this.text.selectedFont = found;
 				}
-				this.enable = settings.enabled ? true : false;
+				this.enable = !!settings.enabled;
 			});
 		},
 

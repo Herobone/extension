@@ -66,45 +66,26 @@ body {
 /*─────────────────────────────────────────────────
 	3) YOUR HELPERBIRD CLASSES
   ─────────────────────────────────────────────────*/
-/* regular */
-.helperbird-font-opendyslexic-regular
-	*:not([class*='icon']):not([class*='material'])
-	:not([class*='symbols']):not([class*='font']) {
-	font-family: var(--opendyslexic-family);
-	font-weight: 400;
-	font-style: normal;
+/* Simplified inheritance-based application */
+.helperbird-font-opendyslexic-regular,
+.helperbird-font-opendyslexic-italic,
+.helperbird-font-opendyslexic-bold,
+.helperbird-font-opendyslexic-bold-italic {
+	font-family: var(--opendyslexic-family) !important;
 	line-height: 1.5;
 }
 
-/* italic */
-.helperbird-font-opendyslexic-italic
-	*:not([class*='icon']):not([class*='material'])
-	:not([class*='symbols']):not([class*='font']) {
-	font-family: var(--opendyslexic-family);
-	font-weight: 400;
-	font-style: italic;
-	line-height: 1.5;
+.helperbird-font-opendyslexic-regular *:not([class*='icon']):not([class*='material']),
+.helperbird-font-opendyslexic-italic *:not([class*='icon']):not([class*='material']),
+.helperbird-font-opendyslexic-bold *:not([class*='icon']):not([class*='material']),
+.helperbird-font-opendyslexic-bold-italic *:not([class*='icon']):not([class*='material']) {
+	font-family: inherit !important;
 }
 
-/* bold */
-.helperbird-font-opendyslexic-bold
-	*:not([class*='icon']):not([class*='material'])
-	:not([class*='symbols']):not([class*='font']) {
-	font-family: var(--opendyslexic-family);
-	font-weight: 700;
-	font-style: normal;
-	line-height: 1.5;
-}
-
-/* bold-italic */
-.helperbird-font-opendyslexic-bold-italic
-	*:not([class*='icon']):not([class*='material'])
-	:not([class*='symbols']):not([class*='font']) {
-	font-family: var(--opendyslexic-family);
-	font-weight: 700;
-	font-style: italic;
-	line-height: 1.5;
-}
+.helperbird-font-opendyslexic-regular { font-weight: 400; font-style: normal; }
+.helperbird-font-opendyslexic-italic { font-weight: 400; font-style: italic; }
+.helperbird-font-opendyslexic-bold { font-weight: 700; font-style: normal; }
+.helperbird-font-opendyslexic-bold-italic { font-weight: 700; font-style: italic; }
 
 /*─────────────────────────────────────────────────
 	4) ZEBRA STRIPES & HOVER EFFECTS
@@ -141,10 +122,8 @@ li.helperbird-font-opendyslexic-bold-italic:hover {
 /* ─────────────────────────────────────────────────
    Base Bold Context (all text = 700)
 ───────────────────────────────────────────────── */
-.helperbird-font-opendyslexic-bold *:not([class*="icon"]):not([class*="material"])
-  :not([class*="symbols"]):not([class*="font"]) {
-  font-weight: 700;
-}
+/* Bold context already sets weight on root class; override descendants only if author forces something else */
+.helperbird-font-opendyslexic-bold * { font-weight: inherit; }
 
 /* ─────────────────────────────────────────────────
    Now: Make <b> & <strong> even bolder in that context
@@ -158,11 +137,8 @@ li.helperbird-font-opendyslexic-bold-italic:hover {
 /* ─────────────────────────────────────────────────
    And for Bold‐Italic mode:
 ───────────────────────────────────────────────── */
-.helperbird-font-opendyslexic-bold-italic *:not([class*="icon"]):not([class*="material"])
-  :not([class*="symbols"]):not([class*="font"]) {
-  font-weight: 700;
-  font-style: italic;
-}
+/* Bold-italic context base adjustments */
+.helperbird-font-opendyslexic-bold-italic * { font-weight: inherit; font-style: inherit; }
 
 .helperbird-font-opendyslexic-bold-italic b,
 .helperbird-font-opendyslexic-bold-italic strong {

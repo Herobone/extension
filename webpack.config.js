@@ -29,8 +29,13 @@ module.exports = {
 			filename: 'scripts/background.js'
 		},
 		'scripts/engine': './scripts/content/engine.js',
-
 		'scripts/popup': './scripts/popup.js'
+	},
+
+	optimization: {
+		minimize: true,
+		usedExports: true,
+		sideEffects: false
 	},
 
 	module: {
