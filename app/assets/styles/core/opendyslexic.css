@@ -66,19 +66,12 @@ body {
 	3) YOUR HELPERBIRD CLASSES
   ─────────────────────────────────────────────────*/
 /* Simplified inheritance-based application */
-.helperbird-font-opendyslexic-regular,
-.helperbird-font-opendyslexic-italic,
-.helperbird-font-opendyslexic-bold,
-.helperbird-font-opendyslexic-bold-italic {
+.helperbird-font-opendyslexic-regular *:not([class*='icon']):not([class*='material']):not([class*='fa']),
+.helperbird-font-opendyslexic-italic *:not([class*='icon']):not([class*='material']):not([class*='fa']),
+.helperbird-font-opendyslexic-bold *:not([class*='icon']):not([class*='material']):not([class*='fa']),
+.helperbird-font-opendyslexic-bold-italic *:not([class*='icon']):not([class*='material']):not([class*='fa']) {
 	font-family: var(--opendyslexic-family) !important;
 	line-height: 1.5;
-}
-
-.helperbird-font-opendyslexic-regular *:not([class*='icon']):not([class*='material']),
-.helperbird-font-opendyslexic-italic *:not([class*='icon']):not([class*='material']),
-.helperbird-font-opendyslexic-bold *:not([class*='icon']):not([class*='material']),
-.helperbird-font-opendyslexic-bold-italic *:not([class*='icon']):not([class*='material']) {
-	font-family: inherit !important;
 }
 
 .helperbird-font-opendyslexic-regular { font-weight: 400; font-style: normal; }
